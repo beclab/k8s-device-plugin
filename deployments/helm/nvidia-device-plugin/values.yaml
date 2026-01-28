@@ -88,7 +88,7 @@ tolerations:
   # See https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/
   - key: CriticalAddonsOnly
     operator: Exists
-  - key: nvidia.com/gpu
+  - key: nvidia.com/gb10
     operator: Exists
     effect: NoSchedule
 
@@ -131,7 +131,7 @@ nfd:
       operator: "Equal"
       value: ""
       effect: "NoSchedule"
-    - key: "nvidia.com/gpu"
+    - key: "nvidia.com/gb10"
       operator: "Equal"
       value: "present"
       effect: "NoSchedule"

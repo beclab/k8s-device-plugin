@@ -166,7 +166,7 @@ production setting.
 ### Running GPU Jobs
 
 With the daemonset deployed, NVIDIA GPUs can now be requested by a container
-using the `nvidia.com/gpu` resource type:
+using the `nvidia.com/gb10` resource type:
 
 ```shell
 cat <<EOF | kubectl apply -f -
@@ -181,9 +181,9 @@ spec:
       image: nvcr.io/nvidia/k8s/cuda-sample:vectoradd-cuda12.5.0
       resources:
         limits:
-          nvidia.com/gpu: 1 # requesting 1 GPU
+          nvidia.com/gb10: 1 # requesting 1 GPU
   tolerations:
-  - key: nvidia.com/gpu
+  - key: nvidia.com/gb10
     operator: Exists
     effect: NoSchedule
 EOF
@@ -411,24 +411,24 @@ version: v1
 sharing:
   timeSlicing:
     resources:
-    - name: nvidia.com/gpu
+    - name: nvidia.com/gb10
       replicas: 10
 ```
 
 If this configuration were applied to a node with 8 GPUs on it, the plugin
-would now advertise 80 `nvidia.com/gpu` resources to Kubernetes instead of 8.
+would now advertise 80 `nvidia.com/gb10` resources to Kubernetes instead of 8.
 
 ```shell
 $ kubectl describe node
 ...
 Capacity:
-  nvidia.com/gpu: 80
+  nvidia.com/gb10: 80
 ...
 ```
 
 Likewise, if the following configuration were applied to a node, then 80
-`nvidia.com/gpu.shared` resources would be advertised to Kubernetes instead of 8
-`nvidia.com/gpu` resources.
+`nvidia.com/gb10.shared` resources would be advertised to Kubernetes instead of 8
+`nvidia.com/gb10` resources.
 
 ```yaml
 version: v1
@@ -436,7 +436,7 @@ sharing:
   timeSlicing:
     renameByDefault: true
     resources:
-    - name: nvidia.com/gpu
+    - name: nvidia.com/gb10
       replicas: 10
     ...
 ```
@@ -445,7 +445,7 @@ sharing:
 $ kubectl describe node
 ...
 Capacity:
-  nvidia.com/gpu.shared: 80
+  nvidia.com/gb10.shared: 80
 ...
 ```
 
@@ -453,8 +453,8 @@ In both cases, the plugin simply creates 10 references to each GPU and
 indiscriminately hands them out to anyone that asks for them.
 
 If `failRequestsGreaterThanOne=true` were set in either of these
-configurations and a user requested more than one `nvidia.com/gpu` or
-`nvidia.com/gpu.shared` resource in their pod spec, then the container would
+configurations and a user requested more than one `nvidia.com/gb10` or
+`nvidia.com/gb10.shared` resource in their pod spec, then the container would
 fail with the resulting error:
 
 ```shell
@@ -463,7 +463,7 @@ $ kubectl describe pod gpu-pod
 Events:
   Type     Reason                    Age   From               Message
   ----     ------                    ----  ----               -------
-  Warning  UnexpectedAdmissionError  13s   kubelet            Allocate failed due to rpc error: code = Unknown desc = request for 'nvidia.com/gpu: 2' too large: maximum request size for shared resources is 1, which is unexpected
+  Warning  UnexpectedAdmissionError  13s   kubelet            Allocate failed due to rpc error: code = Unknown desc = request for 'nvidia.com/gb10: 2' too large: maximum request size for shared resources is 1, which is unexpected
 ...
 ```
 
@@ -480,19 +480,19 @@ recommended, but it is set to `false` by default to retain backwards
 compatibility.
 
 As of now, the only supported resource available for time-slicing are
-`nvidia.com/gpu` as well as any of the resource types that emerge from
+`nvidia.com/gb10` as well as any of the resource types that emerge from
 configuring a node with the mixed MIG strategy.
 
 For example, the full set of time-sliceable resources on a T4 card would be:
 
 ```
-nvidia.com/gpu
+nvidia.com/gb10
 ```
 
 And the full set of time-sliceable resources on an A100 40GB card would be:
 
 ```
-nvidia.com/gpu
+nvidia.com/gb10
 nvidia.com/mig-1g.5gb
 nvidia.com/mig-2g.10gb
 nvidia.com/mig-3g.20gb
@@ -502,7 +502,7 @@ nvidia.com/mig-7g.40gb
 Likewise, on an A100 80GB card, they would be:
 
 ```
-nvidia.com/gpu
+nvidia.com/gb10
 nvidia.com/mig-1g.10gb
 nvidia.com/mig-2g.20gb
 nvidia.com/mig-3g.40gb
@@ -550,24 +550,24 @@ version: v1
 sharing:
   mps:
     resources:
-    - name: nvidia.com/gpu
+    - name: nvidia.com/gb10
       replicas: 10
 ```
 
 If this configuration were applied to a node with 8 GPUs on it, the plugin
-would now advertise 80 `nvidia.com/gpu` resources to Kubernetes instead of 8.
+would now advertise 80 `nvidia.com/gb10` resources to Kubernetes instead of 8.
 
 ```shell
 $ kubectl describe node
 ...
 Capacity:
-  nvidia.com/gpu: 80
+  nvidia.com/gb10: 80
 ...
 ```
 
 Likewise, if the following configuration were applied to a node, then 80
-`nvidia.com/gpu.shared` resources would be advertised to Kubernetes instead of 8
-`nvidia.com/gpu` resources.
+`nvidia.com/gb10.shared` resources would be advertised to Kubernetes instead of 8
+`nvidia.com/gb10` resources.
 
 ```yaml
 version: v1
@@ -575,7 +575,7 @@ sharing:
   mps:
     renameByDefault: true
     resources:
-    - name: nvidia.com/gpu
+    - name: nvidia.com/gb10
       replicas: 10
     ...
 ```
@@ -584,15 +584,15 @@ sharing:
 $ kubectl describe node
 ...
 Capacity:
-  nvidia.com/gpu.shared: 80
+  nvidia.com/gb10.shared: 80
 ...
 ```
 
-Furthermore, each of these resources -- either `nvidia.com/gpu` or
-`nvidia.com/gpu.shared` -- would have access to the same fraction (1/10) of the
+Furthermore, each of these resources -- either `nvidia.com/gb10` or
+`nvidia.com/gb10.shared` -- would have access to the same fraction (1/10) of the
 total memory and compute resources of the GPU.
 
-**Note**: As of now, the only supported resource available for MPS are `nvidia.com/gpu`
+**Note**: As of now, the only supported resource available for MPS are `nvidia.com/gb10`
 resources and only with full GPUs.
 
 ### IMEX Support
@@ -624,7 +624,7 @@ along with their use. See the related table [here](/docs/gpu-feature-discovery/R
 | Label Name                          | Description                                                                                                                                                                                                                                  | Example        |
 | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
 | nvidia.com/device-plugin.config     | Specifies the configuration to apply to the node. You apply this this label to perform per-node configuration. Refer to [Updating Per-Node Configuration With a Node Label](#updating-per-node-configuration-with-a-node-label) for details. | my-mps-config  |
-| nvidia.com/gpu.sharing-strategy     | Specifies the sharing strategy. The default value, `none`, indicates no sharing.  Other values are `mps` and `time-slicing`.                                                                                                                 | time-slicing   |
+| nvidia.com/gb10.sharing-strategy     | Specifies the sharing strategy. The default value, `none`, indicates no sharing.  Other values are `mps` and `time-slicing`.                                                                                                                 | time-slicing   |
 | nvidia.com/mig.capable              | Specifies if any device on the node supports MIG.                                                                                                                                                                                            | false          |
 | nvidia.com/mps.capable              | Specifies if devices on the node are configured for MPS.                                                                                                                                                                                     | false          |
 | nvidia.com/vgpu.present             | Specifies if devices on the node use vGPU.                                                                                                                                                                                                   | false          |
@@ -830,7 +830,7 @@ on them might be:
 ```shell
 kubectl label node \
   --overwrite \
-  --selector=nvidia.com/gpu.product=TESLA-T4 \
+  --selector=nvidia.com/gb10.product=TESLA-T4 \
   nvidia.com/device-plugin.config=t4-config
 ```
 
@@ -969,7 +969,7 @@ the MIG profile name and the new `SHARED` annotation will be appended to the
 product name, e.g.:
 
 ```
-nvidia.com/gpu.product = A100-SXM4-40GB-MIG-1g.5gb-SHARED
+nvidia.com/gb10.product = A100-SXM4-40GB-MIG-1g.5gb-SHARED
 ```
 
 #### Deploying gpu-feature-discovery in standalone mode

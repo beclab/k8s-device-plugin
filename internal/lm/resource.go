@@ -27,7 +27,7 @@ import (
 	"github.com/NVIDIA/k8s-device-plugin/internal/resource"
 )
 
-const fullGPUResourceName = "nvidia.com/gpu"
+const fullGPUResourceName = "nvidia.com/gb10"
 
 // NewGPUResourceLabelerWithoutSharing creates a resource labeler for the specified device that does not apply sharing labels.
 func NewGPUResourceLabelerWithoutSharing(device resource.Device, count int) (Labeler, error) {

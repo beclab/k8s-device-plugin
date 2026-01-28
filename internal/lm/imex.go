@@ -36,7 +36,7 @@ func newImexLabeler(config *spec.Config, devices []resource.Device) (Labeler, er
 	}
 
 	labels := Labels{
-		"nvidia.com/gpu.clique": strings.Join([]string{clusterUUID, cliqueID}, "."),
+		"nvidia.com/gb10.clique": strings.Join([]string{clusterUUID, cliqueID}, "."),
 	}
 
 	return labels, nil

@@ -35,7 +35,7 @@ func newMachineTypeLabeler(machineTypePath string) (Labeler, error) {
 		machineType = machineTypeUnknown
 	}
 	l := Labels{
-		"nvidia.com/gpu.machine": sanitise(machineType),
+		"nvidia.com/gb10.machine": sanitise(machineType),
 	}
 
 	return l, nil

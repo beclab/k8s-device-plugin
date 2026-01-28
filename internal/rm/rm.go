@@ -97,13 +97,13 @@ func (r *resourceManager) ValidateRequest(ids AnnotatedIDs) error {
 
 // AddDefaultResourcesToConfig adds default resource matching rules to config.Resources
 func AddDefaultResourcesToConfig(infolib info.Interface, nvmllib nvml.Interface, devicelib device.Interface, config *spec.Config) error {
-	_ = config.Resources.AddGPUResource("*", "gpu")
+	_ = config.Resources.AddGPUResource("*", "gb10")
 	if config.Flags.MigStrategy == nil {
 		return nil
 	}
 	switch *config.Flags.MigStrategy {
 	case spec.MigStrategySingle:
-		return config.Resources.AddMIGResource("*", "gpu")
+		return config.Resources.AddMIGResource("*", "gb10")
 	case spec.MigStrategyMixed:
 		hasNVML, reason := infolib.HasNvml()
 		if !hasNVML {

@@ -216,11 +216,11 @@ func newGPUModeLabeler(devices []resource.Device) (Labeler, error) {
 	classes, err := getDeviceClasses(devices)
 	if err != nil {
 		klog.Warningf("Failed to create GPU mode labeler: failed to get device classes: %v", err)
-		return Labels{"nvidia.com/gpu.mode": "unknown"}, nil
+		return Labels{"nvidia.com/gb10.mode": "unknown"}, nil
 	}
 	gpuMode := getModeForClasses(classes)
 	labels := Labels{
-		"nvidia.com/gpu.mode": gpuMode,
+		"nvidia.com/gb10.mode": gpuMode,
 	}
 	return labels, nil
 }

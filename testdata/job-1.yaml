@@ -18,8 +18,8 @@ spec:
             - "--numbodies=10000"
           resources:
             limits:
-              nvidia.com/gpu: "1"
+              nvidia.com/gb10: "1"
       tolerations:
-        - key: "nvidia.com/gpu"
+        - key: "nvidia.com/gb10"
           operator: "Exists"
           effect: "NoSchedule"

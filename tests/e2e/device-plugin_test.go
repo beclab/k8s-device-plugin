@@ -125,7 +125,7 @@ var _ = Describe("GPU Device Plugin", Ordered, Label("gpu", "e2e", "device-plugi
 			}
 		})
 
-		It("should create nvidia.com/gpu resource", func(ctx SpecContext) {
+		It("should create nvidia.com/gb10 resource", func(ctx SpecContext) {
 			nodeList, err := clientSet.CoreV1().Nodes().List(ctx, metav1.ListOptions{})
 			Expect(err).NotTo(HaveOccurred())
 			Expect(len(nodeList.Items)).ToNot(BeZero())
@@ -140,7 +140,7 @@ var _ = Describe("GPU Device Plugin", Ordered, Label("gpu", "e2e", "device-plugi
 			By("Checking the node capacity")
 			capacityChecker := map[string]k8sLabels{
 				targetNodeName: {
-					"nvidia.com/gpu": "^[1-9]$",
+					"nvidia.com/gb10": "^[1-9]$",
 				}}
 			eventuallyNonControlPlaneNodes(ctx, clientSet).Should(MatchCapacity(capacityChecker, nodes), "Node capacity does not match")
 		})

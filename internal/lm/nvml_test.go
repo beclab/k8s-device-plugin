@@ -218,7 +218,7 @@ func TestGPUModeLabeler(t *testing.T) {
 				rt.NewDeviceWithPCIClassMock(0x030000),
 			},
 			expectedLabels: map[string]string{
-				"nvidia.com/gpu.mode": "graphics",
+				"nvidia.com/gb10.mode": "graphics",
 			},
 		},
 		{
@@ -227,7 +227,7 @@ func TestGPUModeLabeler(t *testing.T) {
 				rt.NewDeviceWithPCIClassMock(0x030200),
 			},
 			expectedLabels: map[string]string{
-				"nvidia.com/gpu.mode": "compute",
+				"nvidia.com/gb10.mode": "compute",
 			},
 		},
 		{
@@ -236,7 +236,7 @@ func TestGPUModeLabeler(t *testing.T) {
 				rt.NewDeviceWithPCIClassMock(0x068000),
 			},
 			expectedLabels: map[string]string{
-				"nvidia.com/gpu.mode": "unknown",
+				"nvidia.com/gb10.mode": "unknown",
 			},
 		},
 		{
@@ -247,7 +247,7 @@ func TestGPUModeLabeler(t *testing.T) {
 				rt.NewDeviceWithPCIClassMock(0x030200),
 			},
 			expectedLabels: map[string]string{
-				"nvidia.com/gpu.mode": "compute",
+				"nvidia.com/gb10.mode": "compute",
 			},
 		},
 		{
@@ -258,7 +258,7 @@ func TestGPUModeLabeler(t *testing.T) {
 				rt.NewDeviceWithPCIClassMock(0x030000),
 			},
 			expectedLabels: map[string]string{
-				"nvidia.com/gpu.mode": "graphics",
+				"nvidia.com/gb10.mode": "graphics",
 			},
 		},
 		{
@@ -269,7 +269,7 @@ func TestGPUModeLabeler(t *testing.T) {
 				rt.NewDeviceWithPCIClassMock(0x030000),
 			},
 			expectedLabels: map[string]string{
-				"nvidia.com/gpu.mode": "unknown",
+				"nvidia.com/gb10.mode": "unknown",
 			},
 		},
 	}

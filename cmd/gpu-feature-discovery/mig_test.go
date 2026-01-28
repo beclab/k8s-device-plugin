@@ -79,9 +79,9 @@ func TestMigStrategyNone(t *testing.T) {
 	labels, err := buildLabelMapFromOutput(output)
 	require.NoError(t, err, "Building map of labels from output file")
 
-	require.Equal(t, labels["nvidia.com/gpu.count"], "1", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.product"], "MOCKMODEL", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.memory"], "300", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.count"], "1", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.product"], "MOCKMODEL", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.memory"], "300", "Incorrect label")
 }
 
 func TestMigStrategySingleForNoMigDevices(t *testing.T) {
@@ -141,9 +141,9 @@ func TestMigStrategySingleForNoMigDevices(t *testing.T) {
 	require.NoError(t, err, "Building map of labels from output file")
 
 	require.Equal(t, labels["nvidia.com/mig.strategy"], "single", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.count"], "1", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.product"], "MOCKMODEL", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.memory"], "300", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.count"], "1", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.product"], "MOCKMODEL", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.memory"], "300", "Incorrect label")
 }
 
 func TestMigStrategySingleForMigDeviceMigDisabled(t *testing.T) {
@@ -209,9 +209,9 @@ func TestMigStrategySingleForMigDeviceMigDisabled(t *testing.T) {
 	require.NoError(t, err, "Building map of labels from output file")
 
 	require.Equal(t, labels["nvidia.com/mig.strategy"], "single", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.count"], "1", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.product"], "MOCKMODEL", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.memory"], "300", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.count"], "1", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.product"], "MOCKMODEL", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.memory"], "300", "Incorrect label")
 }
 
 func TestMigStrategySingle(t *testing.T) {
@@ -277,9 +277,9 @@ func TestMigStrategySingle(t *testing.T) {
 	require.NoError(t, err, "Building map of labels from output file")
 
 	require.Equal(t, labels["nvidia.com/mig.strategy"], "single", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.count"], "2", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.product"], "MOCKMODEL-MIG-3g.20gb", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.memory"], "20", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.count"], "2", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.product"], "MOCKMODEL-MIG-3g.20gb", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.memory"], "20", "Incorrect label")
 }
 
 func TestMigStrategyMixed(t *testing.T) {
@@ -346,9 +346,9 @@ func TestMigStrategyMixed(t *testing.T) {
 	require.NoError(t, err, "Building map of labels from output file")
 
 	require.Equal(t, labels["nvidia.com/mig.strategy"], "mixed", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.count"], "1", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.product"], "MOCKMODEL", "Incorrect label")
-	require.Equal(t, labels["nvidia.com/gpu.memory"], "300", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.count"], "1", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.product"], "MOCKMODEL", "Incorrect label")
+require.Equal(t, labels["nvidia.com/gb10.memory"], "300", "Incorrect label")
 	require.Contains(t, labels, "nvidia.com/mig-3g.20gb.count", "Missing label")
 	require.Contains(t, labels, "nvidia.com/mig-1g.5gb.count", "Missing label")
 }

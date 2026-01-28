@@ -137,14 +137,14 @@ items:
       nvidia.com/cuda.driver.rev: ""
       nvidia.com/cuda.runtime.major: "11"
       nvidia.com/cuda.runtime.minor: "1"
-      nvidia.com/gpu.compute.major: "8"
-      nvidia.com/gpu.compute.minor: "0"
+      nvidia.com/gb10.compute.major: "8"
+      nvidia.com/gb10.compute.minor: "0"
       nvidia.com/gfd.timestamp: "1594644571"
-      nvidia.com/gpu.count: "1"
-      nvidia.com/gpu.family: ampere
-      nvidia.com/gpu.machine: NVIDIA DGX-2H
-      nvidia.com/gpu.memory: "39538"
-      nvidia.com/gpu.product: A100-SXM4-40GB
+      nvidia.com/gb10.count: "1"
+      nvidia.com/gb10.family: ampere
+      nvidia.com/gb10.machine: NVIDIA DGX-2H
+      nvidia.com/gb10.memory: "39538"
+      nvidia.com/gb10.product: A100-SXM4-40GB
       ...
 ...
 ```
@@ -211,23 +211,23 @@ For a similar list of labels generated or used by the device plugin, see [here](
 | nvidia.com/cuda.runtime-version.minor   | Integer    | Minor of the version of CUDA                                                                                                                                                  | 5              |
 | nvidia.com/cuda.runtime-version.full   | Integer    | Full version number of CUDA                                                                                                                                                    | 12.5           |
 | nvidia.com/gfd.timestamp       | Integer    | Timestamp of the generated labels (optional)                                                                                                                                           | 1724632719     |
-| nvidia.com/gpu.compute.major   | Integer    | Major of the compute capabilities                                                                                                                                                      | 7              |
-| nvidia.com/gpu.compute.minor   | Integer    | Minor of the compute capabilities                                                                                                                                                      | 5              |
-| nvidia.com/gpu.count           | Integer    | Number of GPUs                                                                                                                                                                         | 2              |
-| nvidia.com/gpu.family          | String     | Architecture family of the GPU                                                                                                                                                         | turing         |
-| nvidia.com/gpu.machine         | String     | Machine type. If in a public cloud provider, value may be set to the instance type.                                                                                                    | DGX-1          |
-| nvidia.com/gpu.memory          | Integer    | Memory of the GPU in mebibytes (MiB)                                                                                                                                                    | 15360          |
-| nvidia.com/gpu.product         | String     | Model of the GPU. May be modified by the device plugin if a sharing strategy is employed depending on the config.                                                                      | Tesla-T4       |
-| nvidia.com/gpu.replicas        | String     | Number of GPU replicas available. Will be equal to the number of physical GPUs unless some sharing strategy is employed in which case the GPU count will be multiplied by replicas.    | 4              |
-| nvidia.com/gpu.mode            | String     | Mode of the GPU. Can be either "compute" or "display". Details of the GPU modes can be found [here](https://docs.nvidia.com/grid/13.0/grid-gpumodeswitch-user-guide/index.html#compute-and-graphics-mode) | compute        |
-| nvidia.com/gpu.clique          | String     | GPUFabric ClusterUUID + CliqueID                                                                                                                               | 7b968a6d-c8aa-45e1-9e07-e1e51be99c31.1 |
+| nvidia.com/gb10.compute.major   | Integer    | Major of the compute capabilities                                                                                                                                                      | 7              |
+| nvidia.com/gb10.compute.minor   | Integer    | Minor of the compute capabilities                                                                                                                                                      | 5              |
+| nvidia.com/gb10.count           | Integer    | Number of GPUs                                                                                                                                                                         | 2              |
+| nvidia.com/gb10.family          | String     | Architecture family of the GPU                                                                                                                                                         | turing         |
+| nvidia.com/gb10.machine         | String     | Machine type. If in a public cloud provider, value may be set to the instance type.                                                                                                    | DGX-1          |
+| nvidia.com/gb10.memory          | Integer    | Memory of the GPU in mebibytes (MiB)                                                                                                                                                    | 15360          |
+| nvidia.com/gb10.product         | String     | Model of the GPU. May be modified by the device plugin if a sharing strategy is employed depending on the config.                                                                      | Tesla-T4       |
+| nvidia.com/gb10.replicas        | String     | Number of GPU replicas available. Will be equal to the number of physical GPUs unless some sharing strategy is employed in which case the GPU count will be multiplied by replicas.    | 4              |
+| nvidia.com/gb10.mode            | String     | Mode of the GPU. Can be either "compute" or "display". Details of the GPU modes can be found [here](https://docs.nvidia.com/grid/13.0/grid-gpumodeswitch-user-guide/index.html#compute-and-graphics-mode) | compute        |
+| nvidia.com/gb10.clique          | String     | GPUFabric ClusterUUID + CliqueID                                                                                                                               | 7b968a6d-c8aa-45e1-9e07-e1e51be99c31.1 |
 
 Depending on the MIG strategy used, the following set of labels may also be
 available (or override the default values for some of the labels listed above):
 
 ### MIG 'single' strategy
 
-With this strategy, the single `nvidia.com/gpu` label is overloaded to provide
+With this strategy, the single `nvidia.com/gb10` label is overloaded to provide
 information about MIG devices on the node, rather than full GPUs. This assumes
 all GPUs on the node have been divided into identical partitions of the same
 size. The example below shows info for a system with 8 full GPUs, each of which
@@ -236,17 +236,17 @@ is partitioned into 7 equal sized MIG devices (56 total).
 | Label Name                          | Value Type | Meaning                                  | Example                   |
 | ----------------------------------- | ---------- | ---------------------------------------- | ------------------------- |
 | nvidia.com/mig.strategy             | String     | MIG strategy in use                      | single                    |
-| nvidia.com/gpu.product (overridden) | String     | Model of the GPU (with MIG info added)   | A100-SXM4-40GB-MIG-1g.5gb |
-| nvidia.com/gpu.count   (overridden) | Integer    | Number of MIG devices                    | 56                        |
-| nvidia.com/gpu.memory  (overridden) | Integer    | Memory of each MIG device in megabytes (MB) | 5120                      |
-| nvidia.com/gpu.multiprocessors      | Integer    | Number of Multiprocessors for MIG device | 14                        |
-| nvidia.com/gpu.slices.gi            | Integer    | Number of GPU Instance slices            | 1                         |
-| nvidia.com/gpu.slices.ci            | Integer    | Number of Compute Instance slices        | 1                         |
-| nvidia.com/gpu.engines.copy         | Integer    | Number of DMA engines for MIG device     | 1                         |
-| nvidia.com/gpu.engines.decoder      | Integer    | Number of decoders for MIG device        | 1                         |
-| nvidia.com/gpu.engines.encoder      | Integer    | Number of encoders for MIG device        | 1                         |
-| nvidia.com/gpu.engines.jpeg         | Integer    | Number of JPEG engines for MIG device    | 0                         |
-| nvidia.com/gpu.engines.ofa          | Integer    | Number of OfA engines for MIG device     | 0                         |
+| nvidia.com/gb10.product (overridden) | String     | Model of the GPU (with MIG info added)   | A100-SXM4-40GB-MIG-1g.5gb |
+| nvidia.com/gb10.count   (overridden) | Integer    | Number of MIG devices                    | 56                        |
+| nvidia.com/gb10.memory  (overridden) | Integer    | Memory of each MIG device in megabytes (MB) | 5120                      |
+| nvidia.com/gb10.multiprocessors      | Integer    | Number of Multiprocessors for MIG device | 14                        |
+| nvidia.com/gb10.slices.gi            | Integer    | Number of GPU Instance slices            | 1                         |
+| nvidia.com/gb10.slices.ci            | Integer    | Number of Compute Instance slices        | 1                         |
+| nvidia.com/gb10.engines.copy         | Integer    | Number of DMA engines for MIG device     | 1                         |
+| nvidia.com/gb10.engines.decoder      | Integer    | Number of decoders for MIG device        | 1                         |
+| nvidia.com/gb10.engines.encoder      | Integer    | Number of encoders for MIG device        | 1                         |
+| nvidia.com/gb10.engines.jpeg         | Integer    | Number of JPEG engines for MIG device    | 0                         |
+| nvidia.com/gb10.engines.ofa          | Integer    | Number of OfA engines for MIG device     | 0                         |
 
 ### MIG 'mixed' strategy
 

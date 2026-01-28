@@ -56,7 +56,7 @@ func TestValidateRequest(t *testing.T) {
 				TimeSlicing: spec.ReplicatedResources{
 					Resources: []spec.ReplicatedResource{
 						{
-							Name:     "nvidia.com/gpu",
+							Name:     "nvidia.com/gb10",
 							Replicas: 2,
 						},
 					},
@@ -76,7 +76,7 @@ func TestValidateRequest(t *testing.T) {
 				TimeSlicing: spec.ReplicatedResources{
 					Resources: []spec.ReplicatedResource{
 						{
-							Name:     "nvidia.com/gpu",
+							Name:     "nvidia.com/gb10",
 							Replicas: 2,
 						},
 					},
@@ -97,7 +97,7 @@ func TestValidateRequest(t *testing.T) {
 					FailRequestsGreaterThanOne: true,
 					Resources: []spec.ReplicatedResource{
 						{
-							Name:     "nvidia.com/gpu",
+							Name:     "nvidia.com/gb10",
 							Replicas: 2,
 						},
 					},
@@ -118,7 +118,7 @@ func TestValidateRequest(t *testing.T) {
 				MPS: &spec.ReplicatedResources{
 					Resources: []spec.ReplicatedResource{
 						{
-							Name:     "nvidia.com/gpu",
+							Name:     "nvidia.com/gb10",
 							Replicas: 2,
 						},
 					},
@@ -138,7 +138,7 @@ func TestValidateRequest(t *testing.T) {
 				MPS: &spec.ReplicatedResources{
 					Resources: []spec.ReplicatedResource{
 						{
-							Name:     "nvidia.com/gpu",
+							Name:     "nvidia.com/gb10",
 							Replicas: 2,
 						},
 					},
@@ -160,7 +160,7 @@ func TestValidateRequest(t *testing.T) {
 					FailRequestsGreaterThanOne: true,
 					Resources: []spec.ReplicatedResource{
 						{
-							Name:     "nvidia.com/gpu",
+							Name:     "nvidia.com/gb10",
 							Replicas: 2,
 						},
 					},

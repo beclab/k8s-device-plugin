@@ -250,7 +250,7 @@ func newInvalidMigStrategyLabeler(device resource.Device, reason string) (Labele
 	}
 
 	rl := resourceLabeler{
-		resourceName: "nvidia.com/gpu",
+		resourceName: "nvidia.com/gb10",
 	}
 
 	labels := rl.productLabel(model, "MIG", "INVALID")
